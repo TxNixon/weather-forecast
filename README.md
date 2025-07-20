@@ -77,7 +77,3 @@ This app can be deployed to:
 - **Heroku**: Use Heroku CLI
 
 Make sure to set the `WEATHER_API_KEY` environment variable in your deployment platform.
-
-## License
-
-MIT License
