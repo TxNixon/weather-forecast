@@ -15,8 +15,8 @@ A beautiful weather application built with Express.js and vanilla JavaScript tha
 1. Clone this repository:
 
 ```bash
-git clone <your-repo-url>
-cd cuyweather
+git clone https://github.com/TxNixon/weather-forecast.git
+cd weather-forecast
 ```
 
 2. Install dependencies:
@@ -29,6 +29,7 @@ npm install
 
 ```env
 WEATHER_API_KEY=your_api_key_from_weatherapi.com
+OPENAI_API_KEY=your_api_key_from_openai
 ```
 
 4. Start the server:
