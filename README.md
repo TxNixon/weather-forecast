@@ -1,4 +1,4 @@
-# CuyWeather 🌤️
+# Weather-Forecast 🌤️
 
 A beautiful weather application built with Express.js and vanilla JavaScript that provides real-time weather information and forecasts.
 
