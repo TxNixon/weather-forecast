@@ -2,6 +2,9 @@
 
 A beautiful weather application built with Express.js and vanilla JavaScript that provides real-time weather information and forecasts.
 
+for demo please visit this link : https://weather-forecast-lus6.onrender.com/
+deployed on render.com
+
 ## Features
 
 - Real-time weather data
