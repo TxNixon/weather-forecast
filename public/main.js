@@ -114,23 +114,23 @@ window.onload = () => {
 
 // AI Chat Functionality
 function initializeChat() {
-  const chatContainer = document.getElementById('chatContainer');
-  const chatToggle = document.getElementById('chatToggle');
-  const chatInput = document.getElementById('chatInput');
-  const sendButton = document.getElementById('sendMessage');
-  const chatMessages = document.getElementById('chatMessages');
+  const chatContainer = document.getElementById("chatContainer");
+  const chatToggle = document.getElementById("chatToggle");
+  const chatInput = document.getElementById("chatInput");
+  const sendButton = document.getElementById("sendMessage");
+  const chatMessages = document.getElementById("chatMessages");
 
   // Toggle chat window
-  chatToggle.addEventListener('click', () => {
-    chatContainer.classList.toggle('open');
+  chatToggle.addEventListener("click", () => {
+    chatContainer.classList.toggle("open");
   });
 
   // Send message on button click
-  sendButton.addEventListener('click', sendMessage);
+  sendButton.addEventListener("click", sendMessage);
 
   // Send message on Enter key
-  chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
       sendMessage();
     }
   });
@@ -140,41 +140,47 @@ function initializeChat() {
     if (!message) return;
 
     // Add user message to chat
-    addMessageToChat(message, 'user');
-    chatInput.value = '';
+    addMessageToChat(message, "user");
+    chatInput.value = "";
 
     // Show typing indicator
     showTypingIndicator();
 
     // Send to AI
-    fetch('/api/chat', {
-      method: 'POST',
+    fetch("/api/chat", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         message: message,
-        weatherData: currentWeatherData
+        weatherData: currentWeatherData,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        hideTypingIndicator();
+        if (data.error) {
+          addMessageToChat(
+            "Sorry, I'm having trouble right now. Please try again later.",
+            "ai"
+          );
+        } else {
+          addMessageToChat(data.response, "ai");
+        }
       })
-    })
-    .then(response => response.json())
-    .then(data => {
-      hideTypingIndicator();
-      if (data.error) {
-        addMessageToChat('Sorry, I\'m having trouble right now. Please try again later.', 'ai');
-      } else {
-        addMessageToChat(data.response, 'ai');
-      }
-    })
-    .catch(error => {
-      hideTypingIndicator();
-      addMessageToChat('Sorry, I encountered an error. Please try again.', 'ai');
-      console.error('Chat error:', error);
-    });
+      .catch((error) => {
+        hideTypingIndicator();
+        addMessageToChat(
+          "Sorry, I encountered an error. Please try again.",
+          "ai"
+        );
+        console.error("Chat error:", error);
+      });
   }
 
   function addMessageToChat(message, sender) {
-    const messageDiv = document.createElement('div');
+    const messageDiv = document.createElement("div");
     messageDiv.className = `message ${sender}`;
     messageDiv.textContent = message;
     chatMessages.appendChild(messageDiv);
@@ -182,16 +188,16 @@ function initializeChat() {
   }
 
   function showTypingIndicator() {
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'typing-indicator';
-    typingDiv.textContent = '🤖 AI is thinking...';
-    typingDiv.id = 'typing';
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "typing-indicator";
+    typingDiv.textContent = "🤖 AI is thinking...";
+    typingDiv.id = "typing";
     chatMessages.appendChild(typingDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   function hideTypingIndicator() {
-    const typing = document.getElementById('typing');
+    const typing = document.getElementById("typing");
     if (typing) {
       typing.remove();
     }
@@ -199,32 +205,35 @@ function initializeChat() {
 
   // Add welcome message
   setTimeout(() => {
-    addMessageToChat('Hi! I\'m your weather AI assistant. Ask me anything about the weather! 🌤️', 'ai');
+    addMessageToChat(
+      "Hi! I'm your weather AI assistant. Ask me anything about the weather! 🌤️",
+      "ai"
+    );
   }, 1000);
 }
 
 // Weather Predictions Functionality
 function initializePredictions() {
-  const predictButton = document.getElementById('predictWeather');
-  
-  predictButton.addEventListener('click', async () => {
-    predictButton.textContent = '🔮 Analyzing...';
+  const predictButton = document.getElementById("predictWeather");
+
+  predictButton.addEventListener("click", async () => {
+    predictButton.textContent = "🔮 Analyzing...";
     predictButton.disabled = true;
 
     try {
       const response = await fetch(`/api/predict/${city}`);
       const predictions = await response.json();
-      
+
       if (predictions.error) {
-        alert('Unable to generate predictions. Please try again.');
+        alert("Unable to generate predictions. Please try again.");
       } else {
         showPredictions(predictions);
       }
     } catch (error) {
-      alert('Error getting predictions. Please try again.');
-      console.error('Prediction error:', error);
+      alert("Error getting predictions. Please try again.");
+      console.error("Prediction error:", error);
     } finally {
-      predictButton.textContent = '🔮 7-Day Predictions';
+      predictButton.textContent = "🔮 7-Day Predictions";
       predictButton.disabled = false;
     }
   });
@@ -244,46 +253,59 @@ function showPredictions(data) {
           <div class="trends-grid">
             <div class="trend-item">
               <span>🌡️ Temperature:</span>
-              <span class="trend-${data.trends.temperatureTrend}">${data.trends.temperatureTrend}</span>
+              <span class="trend-${data.trends.temperatureTrend}">${
+    data.trends.temperatureTrend
+  }</span>
             </div>
             <div class="trend-item">
               <span>💧 Humidity:</span>
-              <span class="trend-${data.trends.humidityTrend}">${data.trends.humidityTrend}</span>
+              <span class="trend-${data.trends.humidityTrend}">${
+    data.trends.humidityTrend
+  }</span>
             </div>
             <div class="trend-item">
               <span>🌧️ Rain Chance:</span>
-              <span class="trend-${data.trends.rainTrend}">${data.trends.rainTrend}</span>
+              <span class="trend-${data.trends.rainTrend}">${
+    data.trends.rainTrend
+  }</span>
             </div>
           </div>
         </div>
 
         <div class="predictions-grid">
-          ${data.predictions.map(pred => `
+          ${data.predictions
+            .map(
+              (pred) => `
             <div class="prediction-day">
-              <div class="pred-date">${new Date(pred.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</div>
+              <div class="pred-date">${new Date(pred.date).toLocaleDateString(
+                "en-US",
+                { weekday: "short", month: "short", day: "numeric" }
+              )}</div>
               <div class="pred-temp">${pred.maxTemp}° / ${pred.minTemp}°</div>
               <div class="pred-condition">${pred.condition}</div>
               <div class="pred-rain">Rain: ${pred.chanceOfRain}%</div>
               <div class="pred-confidence">Confidence: ${pred.confidence}%</div>
             </div>
-          `).join('')}
+          `
+            )
+            .join("")}
         </div>
 
         <div class="recommendations-section">
           <h3>💡 Recommendations</h3>
           <ul>
-            ${data.recommendations.map(rec => `<li>${rec}</li>`).join('')}
+            ${data.recommendations.map((rec) => `<li>${rec}</li>`).join("")}
           </ul>
         </div>
       </div>
     </div>
   `;
 
-  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
 }
 
 function closePredictionModal() {
-  const modal = document.getElementById('predictionModal');
+  const modal = document.getElementById("predictionModal");
   if (modal) {
     modal.remove();
   }

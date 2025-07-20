@@ -368,8 +368,12 @@ body[data-mode="night"] {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .prediction-content {
@@ -416,11 +420,13 @@ body[data-mode="night"] {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.trends-section, .recommendations-section {
+.trends-section,
+.recommendations-section {
   padding: 20px 30px;
 }
 
-.trends-section h3, .recommendations-section h3 {
+.trends-section h3,
+.recommendations-section h3 {
   margin: 0 0 15px 0;
   color: #333;
 }
@@ -440,9 +446,18 @@ body[data-mode="night"] {
   border-left: 4px solid #667eea;
 }
 
-.trend-increasing { color: #e74c3c; font-weight: bold; }
-.trend-decreasing { color: #3498db; font-weight: bold; }
-.trend-stable { color: #27ae60; font-weight: bold; }
+.trend-increasing {
+  color: #e74c3c;
+  font-weight: bold;
+}
+.trend-decreasing {
+  color: #3498db;
+  font-weight: bold;
+}
+.trend-stable {
+  color: #27ae60;
+  font-weight: bold;
+}
 
 .predictions-grid {
   display: grid;
@@ -480,7 +495,8 @@ body[data-mode="night"] {
   margin: 8px 0;
 }
 
-.pred-rain, .pred-confidence {
+.pred-rain,
+.pred-confidence {
   font-size: 12px;
   color: #888;
   margin: 4px 0;
