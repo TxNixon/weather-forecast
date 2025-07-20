@@ -1,0 +1,25 @@
+{
+  "name": "cuyweather",
+  "version": "1.0.0",
+  "description": "Weather app with secure API key handling",
+  "main": "Express.js",
+  "scripts": {
+    "start": "node Express.js",
+    "dev": "nodemon Express.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "keywords": [
+    "weather",
+    "api",
+    "express"
+  ],
+  "author": "",
+  "license": "MIT"
+}
