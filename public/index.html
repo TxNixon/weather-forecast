@@ -25,6 +25,12 @@
             <div class="weather-icon"></div>
             <div class="temperature">-- °C</div>
         </div>
+        
+        <!-- Weather Prediction Button -->
+        <div class="prediction-section">
+            <button id="predictWeather" class="predict-btn">🔮 7-Day Predictions</button>
+        </div>
+        
         <div id="forecast">
 
             <div class="forecast-grid">
@@ -51,6 +57,20 @@
 
         </div>
     </div>
+
+    <!-- AI Chat Section -->
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h3>🤖 Weather AI Assistant</h3>
+            <button class="chat-toggle" id="chatToggle">💬</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-container">
+            <input type="text" id="chatInput" placeholder="Ask me about the weather..." />
+            <button id="sendMessage">Send</button>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
 
