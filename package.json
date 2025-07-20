@@ -5,6 +5,7 @@
   "main": "Express.js",
   "scripts": {
     "start": "node Express.js",
+    "build": "echo 'No build needed for this project'",
     "dev": "nodemon Express.js"
   },
   "dependencies": {
